@@ -1,0 +1,14 @@
+Sign Up or Login 
+
+<%= form_tag users_path do %> 
+    <label> Email </label> 
+    <%= text_field_tag :'user[email]' %> 
+    
+    <label> Password </label> 
+    <%= text_field_tag :'user[password]' %> 
+
+    <%= submit_tag "Create User" %> 
+
+<% end %> 
+
+<%= link_to "Login", login_path %>

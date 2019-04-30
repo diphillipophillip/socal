@@ -1,0 +1,27 @@
+
+
+<%= form_for @post do |f| %> 
+    <%= f.label :Name %> 
+    <%= f.text_field :name %> 
+
+    <%= f.label :Description %> 
+    <%= f.text_area :description %> 
+
+    <%= f.label :Start_Time %> 
+    <%= f.datetime_select :start_time %> 
+
+    <%= f.label :End_Time %> 
+    <%= f.datetime_select :end_time %> 
+
+    <%= f.submit "Create Post" %> 
+
+    <% end %> 
+
+
+
+
+
+
+
+
+
