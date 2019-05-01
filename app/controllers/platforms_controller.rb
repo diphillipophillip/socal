@@ -1,6 +1,12 @@
 class PlatformsController < ApplicationController
 
 
+    def index 
+        current_user.posts 
+        
+    end 
+
+
     def new 
         @platform = Platform.new 
     end 

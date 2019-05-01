@@ -13,6 +13,13 @@
     <%= f.label :End_Time %> 
     <%= f.datetime_select :end_time %> 
 
+    <%= f.label :Published %> 
+    <%= f.check_box :published %>
+
+    <%= f.label :Choose_a_Platform %> 
+    <%= f.collection_select :platform_id, Platform.all, :id, :name %>
+
+
     <%= f.submit "Create Post" %> 
 
     <% end %> 
