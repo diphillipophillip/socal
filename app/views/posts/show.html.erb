@@ -1,4 +1,7 @@
 
+
+
+
 <label>Name</label> 
 <%= @post.name %> 
 
@@ -10,4 +13,15 @@
 
 <label>Description</label>
 <%= @post.description %> 
+
+
+<% @post.images.each do |image| %>
+    <%= image_tag image, width: "200px" %> <br />
+  <% end %>
+
+
+<%= link_to "Edit", edit_post_path %>
+<%= link_to 'Destroy',  { action: :destroy, id: @post.id }, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%= link_to "View All Posts", posts_path %> 
+
 

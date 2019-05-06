@@ -1,0 +1,39 @@
+
+
+  <%= month_calendar events: @published_posts do |date, posts| %>
+    <%= date.day %>
+  
+    <% posts.each do |post| %>
+      <div>
+        <%= post.name %>
+      </div>
+    <% end %>
+  <% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start Time</th>
+      <th>End Time
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  
+  <tbody>
+    <% @published_posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.name, post_path(post) %></td>
+        <td><%= post.start_time %></td>
+        <td><%= post.end_time %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</table>
+
+<%= link_to "View All Posts", posts_path %> 
+
+<%= link_to "Create a Post", new_post_path %> 
+<br>

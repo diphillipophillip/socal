@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   #root 'welcome#home'
   root 'users#new'
   get 'login' => 'users#signin'
-  post 'login' => 'users#login'
+  post 'login' => 'users#login' 
+  get 'published' => 'posts#published'
+  get '/auth/facebook/callback' => 'sessions#create'
+  get 'logout' => 'posts#logout' 
+  get 'youtube' => 'platforms#youtube'
+  get 'instagram' => 'platforms#instagram'
+  get 'twitter' => 'platforms#twitter'
 end

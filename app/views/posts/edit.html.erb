@@ -25,15 +25,9 @@
     <%= f.label :Choose_a_Platform %> 
     <%= f.collection_select :platform_id, Platform.all, :id, :name %>
 
-    <%= f.label :Upload_Photos %> 
-    <%= f.file_field :images, multiple: true %> 
 
-
-    <%= f.submit "Create Post" %> 
+    <%= f.submit "Edit Post" %> 
 
     <% end %> 
 
-
-
-
-
+    <%= link_to "View All Posts", posts_path %> 

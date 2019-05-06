@@ -2,7 +2,6 @@ class PlatformsController < ApplicationController
 
 
     def index 
-        current_user.posts 
         
     end 
 
@@ -15,7 +14,20 @@ class PlatformsController < ApplicationController
         @platform = Platform.create(platform_params) 
     end 
 
-    def show 
+    def instagram 
+        @posts = current_user.posts.where(platform_id: 2)
+    end 
+
+    def twitter 
+        @posts = current_user.posts.where(platform_id: 1)
+    end 
+
+    def youtube 
+        @posts = current_user.posts.where(platform_id: 3)
+    end 
+
+    def show
+
     end 
 
     private 

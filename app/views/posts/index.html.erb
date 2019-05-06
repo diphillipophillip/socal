@@ -1,10 +1,17 @@
 <h1>Posts</h1>
 
 
-<%= month_calendar do |date| %>
-    <%= date.day %>
-  <% end %>
 
+
+<%= month_calendar events: @posts do |date, posts| %>
+  <%= date.day %>
+
+  <% posts.each do |post| %>
+    <div>
+      <%= post.name %>
+    </div>
+  <% end %>
+<% end %>
 
 <table>
   <thead>
@@ -16,6 +23,7 @@
     </tr>
   </thead>
 
+  
   <tbody>
     <% current_user.posts.each do |post| %>
       <tr>
@@ -26,23 +34,31 @@
     <% end %>
   </tbody>
 </table>
+</table>
+
 
 <br>
+
+<%= link_to "Create a Post", new_post_path %> 
+
 
 <h2>Click to view Posts by a specific Platform!</h2> 
 
 <table>
   <thead>
     <tr>
-      <th><%= link_to "Youtube", platforms_path %></th>
-      <th><%= link_to "Twitter", platforms_path %> </th>
-      <th><%= link_to "Instagram", platforms_path %> </th>
+      <th><%= link_to "Youtube", youtube_path %></th>
+      <th><%= link_to "Twitter", twitter_path %> </th>
+      <th><%= link_to "Instagram", instagram_path %> </th>
       <th colspan="3"></th>
     </tr>
   </thead>
   </table>
 
+<h2> Click here to view all Posts that are Published! </h3> 
 
+<%= link_to 'Published Posts', published_path %> 
+<%= link_to 'Logout', logout_path %>
 
 
 
