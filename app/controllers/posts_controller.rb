@@ -1,17 +1,12 @@
 class PostsController < ApplicationController 
-    
-    #layout 'styling'
 
     def new 
         @post = Post.new 
     end 
 
     def create 
-        @post = Post.create(post_params)
-        @post.images.attach(params[:post][:images])
-        current_user.posts << @post 
-        @platform = Platform.find(params[:post][:platform_id]) 
-        @platform.posts << @post 
+        @post = current_user.posts.create(post_params)
+        @post.images.attach(params[:post][:images]) unless params[:post][:images].blank?
         redirect_to posts_path
     end 
 
@@ -52,7 +47,7 @@ class PostsController < ApplicationController
     private 
 
     def post_params 
-        params.require(:post).permit(:name, :description, :start_time, :end_time, :published) 
+        params.require(:post).permit(:name, :description, :start_time, :end_time, :published, :platform_id) 
     end 
     
 

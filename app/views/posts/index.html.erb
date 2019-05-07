@@ -1,8 +1,16 @@
-<h1>Posts</h1>
+
+<html> 
+<head>
+<link href='scaffolds.scss' rel='stylesheet'>
+<ul class="navbar"> 
+    <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
+    <li class="navitem"><a><%= link_to "Published Posts", published_path %></a></li>
+    <li class="navitem"><a><%= link_to "Create a Post", new_post_path %></a></li>
+</ul>
+</head>
 
 
-
-
+<div class="calendar">
 <%= month_calendar events: @posts do |date, posts| %>
   <%= date.day %>
 
@@ -12,8 +20,10 @@
     </div>
   <% end %>
 <% end %>
+</div>
+</html>
 
-<table>
+<table class='table'>
   <thead>
     <tr>
       <th>Name</th>
@@ -23,7 +33,7 @@
     </tr>
   </thead>
 
-  
+
   <tbody>
     <% current_user.posts.each do |post| %>
       <tr>
@@ -39,8 +49,6 @@
 
 <br>
 
-<%= link_to "Create a Post", new_post_path %> 
-
 
 <h2>Click to view Posts by a specific Platform!</h2> 
 
@@ -55,10 +63,6 @@
   </thead>
   </table>
 
-<h2> Click here to view all Posts that are Published! </h3> 
-
-<%= link_to 'Published Posts', published_path %> 
-<%= link_to 'Logout', logout_path %>
 
 
 

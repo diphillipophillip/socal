@@ -1,9 +1,57 @@
-body {
-  background-color: rgb(255, 255, 255);
-  color: #333;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.table {
+  margin-left :35px;
+}
+
+.navbar {
+  font-family: Arial; 
+  width: 100%;
+  height: 40px; 
+  background-color: #A22C29;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.navitem {
+  display: inline-block;
+  line-height: 40px;
+  text-align: right;
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-left: 80px; 
+}
+
+
+
+.calendar {
   margin: 33px;
+}
+
+.navitem a {
+  text-decoration: none;
+  color: white !important;
+  display: block;
+}
+
+ul li a:hover {
+  color: rgb(28, 185, 224); 
+}
+
+
+
+
+
+body {
+  background-color: #B9BAA3;
+  color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 18px;
 }
 
@@ -11,6 +59,7 @@ p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  color: black;
 }
 
 pre {
@@ -81,4 +130,6 @@ div {
 
 label {
   display: block;
-}
+} 
+
+

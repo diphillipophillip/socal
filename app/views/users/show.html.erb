@@ -1,13 +1,26 @@
 
 
-Thank you for choosing SoCal to manage your Social Media Posts! 
+<html> 
+<head>
+<link href='scaffolds.scss' rel='stylesheet'>
+<ul class="navbar"> 
+    <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
+    <li class="navitem"><a><%= link_to "View All Posts", posts_path %></a></li>
+    <li class="navitem"><a><%= link_to "Create a Post", new_post_path %></a></li>
+</ul>
+</head>
 
-<%= month_calendar do |date| %>
-    <%= date.day %>
-  <% end %>
+<body>
+  <div class='calendar'>
+    <%= month_calendar do |date| %>
+        <%= date.day %>
+    <% end %>
+  </div>
+</body>
 
+</html> 
 
-  <%= link_to "Create a Post", new_post_path %> 
-  <%= link_to "View All Posts", posts_path %>
+  
+  
 
   
