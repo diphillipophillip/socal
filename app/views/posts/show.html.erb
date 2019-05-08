@@ -1,27 +1,50 @@
 
+<html> 
+<head>
+<link href='scaffolds.scss' rel='stylesheet'>
+<ul class="navbar"> 
+    <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
+    <li class="navitem"><a><%= link_to "View All Posts", posts_path %></a></li>
+    <li class="navitem"><a><%= link_to "Published Posts", published_path %></a></li>
+    <li class="navitem"><a><%= link_to "Edit", edit_post_path %></a></li> 
+    <li class="navitem"><a><%= link_to 'Destroy',  { action: :destroy, id: @post.id }, method: :delete, data: { confirm: 'Are you sure?' } %></a></li>
+</ul>
+</head>
+</html>
 
 
-
+<div class="show">
+<div class="label">
 <label>Name</label> 
+</div>
 <%= @post.name %> 
 
+<div class="label">
 <label>Start Time</label> 
+</div>
+
 <%= @post.start_time %> 
 
+<div class="label">
 <label>End Time</label> 
+</div>
+
 <%= @post.end_time %> 
 
+<div class="label">
 <label>Description</label>
+</div> 
 <%= @post.description %> 
+</div>
 
-
+<div class="image">
 <% @post.images.each do |image| %>
-    <%= image_tag image, width: "200px" %> <br />
+    <%= image_tag image, width: "700px", height: "500px" %> <br />
   <% end %>
+  </div> 
 
+<div class="new_buttons">
 
-<%= link_to "Edit", edit_post_path %>
-<%= link_to 'Destroy',  { action: :destroy, id: @post.id }, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<%= link_to "View All Posts", posts_path %> 
+</div>
 
 
