@@ -14,27 +14,29 @@
 
 
 <div class="show">
-<div class="label">
-<label>Name</label> 
-</div>
-<%= @post.name %> 
 
-<div class="label">
-<label>Start Time</label> 
-</div>
+  <div class="label">
+  <label>Name</label> 
+  </div>
+  <%= @post.name %> 
 
-<%= @post.start_time %> 
+  <div class="label">
+  <label>Start Time</label> 
+  </div>
 
-<div class="label">
-<label>End Time</label> 
-</div>
+  <%= @post.start_time %> 
 
-<%= @post.end_time %> 
+  <div class="label">
+  <label>End Time</label> 
+  </div>
 
-<div class="label">
-<label>Description</label>
-</div> 
-<%= @post.description %> 
+  <%= @post.end_time %> 
+
+  <div>
+  <label class="label">Description</label>
+  </div> 
+  <p class="show-content"><%= @post.description %></p>
+
 </div>
 
 <div class="image">
