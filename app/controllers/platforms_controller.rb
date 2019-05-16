@@ -16,7 +16,6 @@ class PlatformsController < ApplicationController
 
     def instagram 
         @posts = current_user.posts.where(platform_id: 2)
-        
     end 
 
     def twitter 

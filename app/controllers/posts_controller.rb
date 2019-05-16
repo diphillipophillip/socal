@@ -7,7 +7,11 @@ class PostsController < ApplicationController
     def create 
         @post = current_user.posts.create(post_params)
         @post.images.attach(params[:post][:images]) unless params[:post][:images].blank?
-        redirect_to posts_path
+        if @post.valid?
+        redirect_to posts_path 
+        else 
+            render 'posts/new'
+        end 
     end 
 
     def index 

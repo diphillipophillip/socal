@@ -69,3 +69,14 @@
 
 
 
+<% if @post && @post.errors.any? %> 
+  
+    <h3 style="color: red;"><%= (@post.errors.count) %> Error(s) prohibited you from creating an account:</h3>
+ 
+    <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

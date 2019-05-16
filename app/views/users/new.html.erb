@@ -1,11 +1,16 @@
 Sign Up or Login 
 
+
 <%= form_tag users_path do %> 
+  <div class="field<%= ' field_with_errors' if @user.errors[:email].any? %>">
     <label> Email </label> 
     <%= text_field_tag :'user[email]' %> 
-    
+  </div> 
+
+  <div class="field<%= ' field_with_errors' if @user.errors[:password].any? %>">
     <label> Password </label> 
     <%= text_field_tag :'user[password]' %> 
+  </div> 
 
     <%= submit_tag "Create User" %> 
 
@@ -13,3 +18,18 @@ Sign Up or Login
 
 <%= link_to "Login", login_path %>
 <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+
+
+<% if @user && @user.errors.any? %> 
+  
+    <h3 style="color: red;"><%= (@user.errors.count) %> Error(s) prohibited you from creating an account:</h3>
+ 
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+

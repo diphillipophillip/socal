@@ -16,12 +16,13 @@ class UsersController < ApplicationController
     
 
     def create 
-        if params[:user][:email].empty? || params[:user][:password].nil? 
-            redirect_to :root 
-        else 
-            @user = User.create(user_params)
+        @user = User.create(user_params)
+        if @user.valid?
             session[:user_id] = @user.id 
             redirect_to user_path(@user)
+            
+        else
+            render "users/new"
         end 
     end 
 
