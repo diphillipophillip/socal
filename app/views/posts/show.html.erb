@@ -12,8 +12,8 @@
 </head>
 </html>
 
-
-<div class="show">
+<center>
+<div class="show" style="width: 40%;">
 
   <div class="label">
   <label>Name</label> 
@@ -38,8 +38,9 @@
   <p class="show-content"><%= @post.description %></p>
 
 </div>
+</center>
 
-<div class="image">
+<div class="image" style="width: 50%;">
 <% @post.images.each do |image| %>
     <%= image_tag image, width: "700px", height: "500px" %> <br />
   <% end %>

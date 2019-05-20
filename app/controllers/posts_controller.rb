@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
     def new 
         @post = Post.new 
+        @platform = Platform.find_by(id: params[:platform_id])
     end 
 
     def create 

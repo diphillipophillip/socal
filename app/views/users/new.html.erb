@@ -1,6 +1,7 @@
-Sign Up or Login 
+<h1 style="text-align: center; margin-top: 250px; margin-bottom: 20px;"> SoCal </h1>
+<h2 style="text-align: center; margin-bottom: 20px;"> Sign Up or Login </h2>
 
-
+<center>
 <%= form_tag users_path do %> 
   <div class="field<%= ' field_with_errors' if @user.errors[:email].any? %>">
     <label> Email </label> 
@@ -16,9 +17,10 @@ Sign Up or Login
 
 <% end %> 
 
+<div style="margin-top: 10px;">
 <%= link_to "Login", login_path %>
 <%= link_to('Log in with Facebook!', '/auth/facebook') %>
-
+</div>
 
 <% if @user && @user.errors.any? %> 
   
@@ -31,5 +33,5 @@ Sign Up or Login
     </ul>
   </div>
 <% end %>
-
+</center>
 

@@ -1,4 +1,6 @@
 
+
+
 <html> 
 <head>
 <link href='scaffolds.scss' rel='stylesheet'>
@@ -49,20 +51,15 @@
 
 <br>
 
+<h2 style="text-align: center"> You have posted <%= @current_user.posts.length %> time(s) </h2>
+<h2 style="margin-left: 50px; margin-top: 20px;">Click to view Posts by a specific Platform!</h2> 
 
-<h2 style="margin-left: 50px;">Click to view Posts by a specific Platform!</h2> 
+<center style="margin-top: 20px;">
 
-<table>
-  <thead>
-    <tr>
-      <th><%= link_to "Youtube", youtube_path %></th>
-      <th><%= link_to "Twitter", twitter_path %> </th>
-      <th><%= link_to "Instagram", instagram_path %> </th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  </table>
-
-
+      <h2 style="margin-bottom: 10px;"><%= link_to "Youtube", platform_path(3) %></h2>
+      <h2 style="margin-bottom: 10px;"><%= link_to "Twitter", platform_path(1) %> </h2>
+      <h2><%= link_to "Instagram", platform_path(2) %> </h2>
+    
+</center>
 
 

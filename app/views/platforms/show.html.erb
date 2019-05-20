@@ -1,16 +1,18 @@
+
 <html> 
 <head>
 <link href='scaffolds.scss' rel='stylesheet'>
 <ul class="navbar"> 
     <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
-    <li class="navitem"><a><%= link_to "View All Posts", posts_path %></a></li>
+    <li class="navitem"><a><%= link_to "Published Posts", published_path %></a></li>
     <li class="navitem"><a><%= link_to "Create a Post", new_post_path %></a></li>
+    <li class="navitem"><a><%= link_to "View All Posts", posts_path %></a></li>
 </ul>
 </head>
 
 
 <div class="calendar">
-<%= month_calendar events: @published_posts do |date, posts| %>
+<%= month_calendar events: @posts do |date, posts| %>
   <%= date.day %>
 
   <% posts.each do |post| %>
@@ -22,7 +24,7 @@
 </div>
 </html>
 
-<table class="table">
+<table class='table'>
   <thead>
     <tr>
       <th>Name</th>
@@ -32,9 +34,9 @@
     </tr>
   </thead>
 
-  
+
   <tbody>
-    <% @published_posts.each do |post| %>
+    <% @posts.each do |post| %>
       <tr>
         <td><%= link_to post.name, post_path(post) %></td>
         <td><%= post.start_time %></td>
@@ -45,14 +47,8 @@
 </table>
 </table>
 
-<br>
 
-<h2 style="margin-left: 50px; margin-top: 20px;">Click to view Posts by a specific Platform!</h2> 
+<h2 style="text-align: center; margin-top: 20px;"> <%= link_to "Create a New #{@platform} Post", new_platform_post_path(@platform_id) %> </h2>
 
-<center style="margin-top: 20px;">
 
-      <h2 style="margin-bottom: 10px;"><%= link_to "Youtube", platform_path(3) %></h2>
-      <h2 style="margin-bottom: 10px;"><%= link_to "Twitter", platform_path(1) %> </h2>
-      <h2><%= link_to "Instagram", platform_path(2) %> </h2>
-    
-</center>
+  

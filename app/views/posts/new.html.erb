@@ -48,12 +48,16 @@
     </div> 
 
     <%= f.check_box :published %>
-   
-    <div class="label">
-    <%= f.label :Choose_a_Platform %> 
-    </div>
 
-    <%= f.collection_select :platform_id, Platform.all, :id, :name %>
+    <% if @platform %>
+      <%= f.hidden_field :platform_id, value: @platform.id %>
+    <% else %>
+      <div class="label">
+      <%= f.label :Choose_a_Platform %> 
+      </div>
+      <%= f.collection_select :platform_id, Platform.all, :id, :name %>
+    <% end %>
+
    
     <div class="label">
     <%= f.label :Upload_Photos %> 
@@ -68,10 +72,10 @@
 
 
 
-
+<center>
 <% if @post && @post.errors.any? %> 
   
-    <h3 style="color: red;"><%= (@post.errors.count) %> Error(s) prohibited you from creating an account:</h3>
+    <h3 style="color: red; margin-top: 20px;"><%= (@post.errors.count) %> Error(s) prohibited you from creating a Post:</h3>
  
     <ul>
     <% @post.errors.full_messages.each do |msg| %>
@@ -80,3 +84,4 @@
     </ul>
   </div>
 <% end %>
+</center>
