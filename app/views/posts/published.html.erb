@@ -13,7 +13,7 @@
 <%= month_calendar events: @published_posts do |date, posts| %>
   <%= date.day %>
 
-  <% posts.each do |post| %>
+  <% current_user.posts.each do |post| %>
     <div>
       <%= post.name %>
     </div>

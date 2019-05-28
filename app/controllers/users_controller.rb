@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
     def login 
         @user = User.find_by_email(user_params[:email]) 
-        return redirect_to :root unless @user.authenticate(user_params[:password])
+        return redirect_to :root unless @user && @user.authenticate(user_params[:password])
         session[:user_id] = @user.id 
         redirect_to posts_path
     end 
