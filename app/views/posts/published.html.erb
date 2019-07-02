@@ -13,7 +13,7 @@
 <%= month_calendar events: @published_posts do |date, posts| %>
   <%= date.day %>
 
-  <% current_user.posts.each do |post| %>
+  <% posts.each do |post| %>
     <div>
       <%= post.name %>
     </div>
@@ -47,6 +47,13 @@
 
 <br>
 
+<%=form_tag(published_path, method: :get) do %> 
+  <%= text_field_tag(:search, params[:search]) %> 
+  <%= submit_tag('Search') %> 
+  <% end %> 
+
+
+
 <h2 style="margin-left: 50px; margin-top: 20px;">Click to view Posts by a specific Platform!</h2> 
 
 <center style="margin-top: 20px;">
@@ -56,3 +63,6 @@
       <h2><%= link_to "Instagram", platform_path(2) %> </h2>
     
 </center>
+
+
+

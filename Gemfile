@@ -5,7 +5,7 @@ ruby '2.6.1'
 
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
-
+gem 'active_model_serializers'
 gem 'dotenv-rails'
 gem 'omniauth-facebook'
 gem 'omniauth'

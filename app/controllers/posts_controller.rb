@@ -1,5 +1,8 @@
 class PostsController < ApplicationController 
 
+    before_action :set_post, except: [:new, :create, :index, :published, :logout]
+
+
     def new 
         @post = Post.new 
         @platform = Platform.find_by(id: params[:platform_id])
@@ -20,27 +23,29 @@ class PostsController < ApplicationController
     end 
 
     def show 
-        @post = Post.find(params[:id])
+        
     end 
 
     def edit 
-        @post = Post.find(params[:id])
+        
     end 
 
     def update 
-        @post = Post.find(params[:id])
         @post.update(post_params)  
         redirect_to post_path(@post) 
     end 
 
     def destroy 
-        @post = Post.find(params[:id])
         @post.destroy 
         redirect_to posts_path
     end 
 
-    def published 
-        @published_posts = Post.published
+    def published  
+        @published_posts = if params[:search]
+            current_user.posts.published.where('name LIKE ?', "%#{params[:search]}%")
+          else
+            current_user.posts.published
+          end
         render 'posts/published'
     end 
 
@@ -50,6 +55,10 @@ class PostsController < ApplicationController
     end 
 
     private 
+
+    def set_post 
+        @post = Post.find(params[:id])
+    end 
 
     def post_params 
         params.require(:post).permit(:name, :description, :start_time, :end_time, :published, :platform_id) 
