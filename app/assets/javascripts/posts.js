@@ -2,8 +2,11 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 document.addEventListener('turbolinks:load', () => {
-    console.log('test')
+
+
+    
     let publishedPostsButton = document.getElementById('published-posts')
+
     publishedPostsButton.addEventListener('click', (e) => {
        getPublished()
         .then(res => res.json())
@@ -11,6 +14,8 @@ document.addEventListener('turbolinks:load', () => {
         .catch(error => displayError(error))
     })
 })
+
+
 
 const getPublished = () => {
     return myFetch('http://localhost:3000/published.json')
@@ -25,6 +30,8 @@ const displayPublished = (results) => {
 const displayError = (error) => {
     document.getElementById('posts').innerHTML = error
 }
+
+
 
 class Post {
     constructor(attributes) {
@@ -42,9 +49,10 @@ class Post {
     </tr>
         `
     }
-    renderShow() {
-
-        
-    }
+    
 }
+
+
+
+
 

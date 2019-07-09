@@ -10,6 +10,10 @@
     <li class="navitem"><a><%= link_to "Create a Post", new_post_path %></a></li>
 </ul>
 </head>
+<body> 
+  <script src="main.js"></script>
+
+</body
 
 
 <div class="calendar">
@@ -39,7 +43,9 @@
   <tbody id='posts'>
     <% current_user.posts.each do |post| %>
       <tr>
+      <div id='post_name'>
         <td><%= link_to post.name, post_path(post) %></td>
+      </div>
         <td><%= post.pretty_start %></td>
         <td><%= post.pretty_end %></td>
       </tr>
@@ -67,4 +73,12 @@
 <div id="error"></div>
 
 
+
+<button id='modalBtn' class='button'> Click Here </button> 
+<div id='simpleModal' class='modal'>
+    <div class='modal-content'>
+      <span id='closeBtn'>&times;</span> 
+        <p> Hello i Am a Modal </p>
+    </div>
+</div> 
 
