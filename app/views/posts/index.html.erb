@@ -36,12 +36,12 @@
   </thead>
 
 
-  <tbody>
+  <tbody id='posts'>
     <% current_user.posts.each do |post| %>
       <tr>
         <td><%= link_to post.name, post_path(post) %></td>
-        <td><%= post.start_time %></td>
-        <td><%= post.end_time %></td>
+        <td><%= post.pretty_start %></td>
+        <td><%= post.pretty_end %></td>
       </tr>
     <% end %>
   </tbody>
@@ -61,5 +61,10 @@
       <h2><%= link_to "Instagram", platform_path(2) %> </h2>
     
 </center>
+
+<button id="published-posts"> Published Posts </button> 
+<div id="published"></div> 
+<div id="error"></div>
+
 
 

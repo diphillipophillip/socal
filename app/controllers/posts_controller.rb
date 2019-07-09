@@ -20,6 +20,10 @@ class PostsController < ApplicationController
 
     def index 
         @posts = current_user.posts 
+        respond_to do |f| 
+            f.html { render :index }
+            f.json { render json: @posts, each_serializer: PostIndexSerializer }
+        end 
     end 
 
     def show 
@@ -46,7 +50,19 @@ class PostsController < ApplicationController
           else
             current_user.posts.published
           end
-        render 'posts/published'
+        if @published_posts.length != 0
+            respond_to do |f| 
+                f.html { render 'posts/published' }
+                f.json { render json: @published_posts, each_serializer: PublishedIndexSerializer} 
+            end 
+        else 
+        @error = "Post Not Found"
+            respond_to do |f| 
+                f.html { render 'posts/published' }
+                f.json { render json: {statusText: @error}, status: :not_found } 
+            end 
+        end 
+        
     end 
 
     def logout 
