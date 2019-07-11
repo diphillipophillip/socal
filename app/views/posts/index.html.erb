@@ -43,16 +43,14 @@
   <tbody id='posts'>
     <% current_user.posts.each do |post| %>
       <tr>
-      <div id='post_name'>
-        <td><%= link_to post.name, post_path(post) %></td>
-      </div>
+        <td><%= link_to post.name, post_path(post), class: 'ajaxShow', data: {id: post.id} %></td>
         <td><%= post.pretty_start %></td>
         <td><%= post.pretty_end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-</table>
+
 
 
 <br>
@@ -78,7 +76,9 @@
 <div id='simpleModal' class='modal'>
     <div class='modal-content'>
       <span id='closeBtn'>&times;</span> 
-        <p> Hello i Am a Modal </p>
+        <div id='postData'>
+          
+        </div>
     </div>
 </div> 
 

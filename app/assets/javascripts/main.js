@@ -5,7 +5,7 @@ document.addEventListener('turbolinks:load', () => {
     let modalBtn = document.getElementById('modalBtn')
     let simpleModal = document.getElementById('simpleModal')
     let closeBtn = document.getElementById('closeBtn')
-    
+    let prevent = document.getElementById('prevent')
 
     modalBtn.addEventListener('click', (e) => {
        openModal() 
@@ -15,6 +15,10 @@ document.addEventListener('turbolinks:load', () => {
     closeBtn.addEventListener('click', (e) => {
         closeModal()
     })
+
+    prevent.addEventListener('click'), (e) => {
+        e.preventDefault();
+    }
 })
 
 const openModal = () => {

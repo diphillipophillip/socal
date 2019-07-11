@@ -20,14 +20,14 @@ class PostsController < ApplicationController
 
     def index 
         @posts = current_user.posts 
-        respond_to do |f| 
-            f.html { render :index }
-            f.json { render json: @posts, each_serializer: PostIndexSerializer }
-        end 
     end 
 
     def show 
-        
+        @post = Post.find(params[:id]) 
+        respond_to do |f| 
+            f.html {render :show}
+            f.json {render json: @post, serializer: ShowSerializer} 
+        end 
     end 
 
     def edit 
