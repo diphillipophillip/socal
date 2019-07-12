@@ -6,7 +6,6 @@
 <link href='scaffolds.scss' rel='stylesheet'>
 <ul class="navbar"> 
     <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
-    <li class="navitem"><a><%= link_to "Published Posts", published_path %></a></li>
     <li class="navitem"><a><%= link_to "Create a Post", new_post_path %></a></li>
 </ul>
 </head>
@@ -66,13 +65,13 @@
     
 </center>
 
-<button id="published-posts"> Published Posts </button> 
+
 <div id="published"></div> 
 <div id="error"></div>
 
 
 
-<button id='modalBtn' class='button'> Click Here </button> 
+<div id='modalBtn' class='button'> </div> 
 <div id='simpleModal' class='modal'>
     <div class='modal-content'>
       <span id='closeBtn'>&times;</span> 
@@ -82,3 +81,4 @@
     </div>
 </div> 
 
+<button id="published-posts"> Published Posts </button> 

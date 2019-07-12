@@ -48,7 +48,8 @@ const attachListeners = () => {
         })
             .then(res => res.json())
             .then(results => {
-                document.getElementById('postData').innerHTML = JSON.stringify(results)
+                renderShow = new Post(results).renderShow()
+                document.getElementById('postData').innerHTML = renderShow 
                 openModal()
                 
             })
@@ -79,7 +80,14 @@ class Post {
     }
 
     renderShow() {
-
+        return `
+            <div>
+            <div class="showInfo">Name: ${this.name}</div>
+            <div class="showInfo">Start Time: ${this.pretty_start}</div>
+            <div class="showInfo">End Time: ${this.pretty_end}</div> 
+            <div class="showInfo">Description: ${this.description}</div>
+           </div>
+           `
     }
     
 }
