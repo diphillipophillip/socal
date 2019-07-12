@@ -2,8 +2,9 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 document.addEventListener('turbolinks:load', () => {
-
+    
     attachListeners()
+    getIndex()
    
     let publishedPostsButton = document.getElementById('published-posts')
 
@@ -15,6 +16,17 @@ document.addEventListener('turbolinks:load', () => {
     })
 
 })
+
+const getIndex = () => {
+    return myFetch('http://localhost:3000/posts.json')
+        .then(res => res.json())
+        .then(results => displayIndex(results))
+}
+
+const displayIndex = (results) => {
+    let html = results.map(postData => Post(postData).render()).join('')
+    document.getElementById('posts').innerHTML = html
+}
 
 
 

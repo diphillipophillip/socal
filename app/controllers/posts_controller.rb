@@ -20,6 +20,10 @@ class PostsController < ApplicationController
 
     def index 
         @posts = current_user.posts 
+        respond_to do |f| 
+            f.html {render 'posts/index'}
+            f.json {render json: @posts, each_serializer: IndexSerializer}
+        end 
     end 
 
     def show 
@@ -31,6 +35,7 @@ class PostsController < ApplicationController
     end 
 
     def edit 
+        @post = Post.find(params[:id]) 
         
     end 
 
@@ -53,7 +58,7 @@ class PostsController < ApplicationController
         if @published_posts.length != 0
             respond_to do |f| 
                 f.html { render 'posts/published' }
-                f.json { render json: @published_posts, each_serializer: PublishedIndexSerializer} 
+                f.json { render json: @published_posts, each_serializer: IndexSerializer} 
             end 
         else 
         @error = "Post Not Found"
