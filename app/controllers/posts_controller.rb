@@ -12,10 +12,15 @@ class PostsController < ApplicationController
         @post = current_user.posts.create(post_params)
         @post.images.attach(params[:post][:images]) unless params[:post][:images].blank?
         if @post.valid?
-        redirect_to posts_path 
+            respond_to do |f| 
+                f.html {redirect_to posts_path }
+                f.json {render json: @post, serializer: NewPostSerializer}
+            end 
+            
         else 
             render 'posts/new'
         end 
+       
     end 
 
     def index 
