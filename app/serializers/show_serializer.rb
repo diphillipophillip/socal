@@ -1,4 +1,4 @@
 class ShowSerializer < ActiveModel::Serializer
-  attributes :id, :pretty_start, :pretty_end, :description, :name
+  attributes :id, :pretty_start, :pretty_end, :description, :name, :platform, :published
 
 end

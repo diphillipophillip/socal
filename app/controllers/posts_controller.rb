@@ -9,12 +9,14 @@ class PostsController < ApplicationController
     end 
 
     def create 
-        @post = current_user.posts.create(post_params)
+        
+        @post = current_user.posts.create(params.require(:post).permit(:name, :description, :published, :platform_id, :start_time, :end_time))
         @post.images.attach(params[:post][:images]) unless params[:post][:images].blank?
+       
         if @post.valid?
             respond_to do |f| 
                 f.html {redirect_to posts_path }
-                f.json {render json: @post, serializer: NewPostSerializer}
+                f.json {render json: @post}
             end 
             
         else 

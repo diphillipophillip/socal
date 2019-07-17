@@ -15,6 +15,7 @@ document.addEventListener('turbolinks:load', () => {
             .then(results => displayPublished(results))
             .catch(error => displayError(error))
         })
+        debugger
 
         let closeBtn = document.getElementById('closeBtn')
         closeBtn.addEventListener('click', (e) => {
@@ -26,32 +27,61 @@ document.addEventListener('turbolinks:load', () => {
         newPostForm.addEventListener('submit', (e) => {
             e.preventDefault()
             let data = {post: {}}; 
+            //let start_time = new Date('12 20, 1995 2:30')
+            
+            let start_time = ""
+            start_time += e.target.querySelector('#post_start_time_2i').value
+            start_time += " "
+            start_time += e.target.querySelector('#post_start_time_3i').value
+            start_time += ", "
+            start_time += e.target.querySelector('#post_start_time_1i').value
+            start_time += " "
+            start_time += e.target.querySelector('#post_start_time_4i').value
+            start_time += ":"
+            start_time += e.target.querySelector('#post_start_time_5i').value
+            let start = new Date(start_time)
+            
+            let end_time = ""
+            end_time += e.target.querySelector('#post_start_time_2i').value
+            end_time += " "
+            end_time += e.target.querySelector('#post_start_time_3i').value
+            end_time += ", "
+            end_time += e.target.querySelector('#post_start_time_1i').value
+            end_time += " "
+            end_time += e.target.querySelector('#post_start_time_4i').value
+            end_time += ":"
+            end_time += e.target.querySelector('#post_start_time_5i').value
+            let end = new Date(end_time)
+            
+            data['post']['start_time'] = start
+            data['post']['end_time'] = end
+            
             data['post']['name'] = e.target.querySelector('#post_name').value
             data['post']['description'] = e.target.querySelector('#post_description').value 
-            data['post']['start_time_1i'] = e.target.querySelector('#post_start_time_1i').value
-            data['post']['start_time_2i'] = e.target.querySelector('#post_start_time_2i').value
-            data['post']['start_time_3i'] = e.target.querySelector('#post_start_time_3i').value
-            data['post']['start_time_4i'] = e.target.querySelector('#post_start_time_4i').value
-            data['post']['start_time_5i'] = e.target.querySelector('#post_start_time_5i').value
-
-            data['post']['end_time_1i'] = e.target.querySelector('#post_end_time_1i').value
-            data['post']['end_time_2i'] = e.target.querySelector('#post_end_time_2i').value
-            data['post']['end_time_3i'] = e.target.querySelector('#post_end_time_3i').value
-            data['post']['end_time_4i'] = e.target.querySelector('#post_end_time_4i').value
-            data['post']['end_time_5i'] = e.target.querySelector('#post_end_time_5i').value
+            
             data['post']['published'] = e.target.querySelector('#post_published').value 
             data['post']['platform_id'] = e.target.querySelector('#post_platform_id').value 
             data['post']['images'] = e.target.querySelector('#post_images').value 
+
             let token = e.target.querySelector('input[name=authenticity_token]').value
-            myFetch(e.target.action, {
+            
+            fetch(`${e.target.action}`, { 
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'X-CSRF-token': token
                 }, 
                 body: JSON.stringify(data)
                 
-            })
+            })  
+                .then(res => res.json()) 
+                .then(function(results) {
+                    console.log(results)
+                    window.location.pathname = '/posts'
+                })
+                .catch(error => console.log(error))
+                
         })
     }
 }) 
@@ -62,9 +92,11 @@ const getIndex = () => {
     return myFetch('http://localhost:3000/posts.json')
         .then(res => res.json())
         .then(results => displayIndex(results))
+
 }
 
 const displayIndex = (results) => {
+    
     let html = results.map(postData => new Post(postData).render()).join('')
     document.getElementById('posts').innerHTML = html
     attachListeners()
@@ -122,6 +154,7 @@ class Post {
         this.pretty_start = attributes.pretty_start 
         this.pretty_end = attributes.pretty_end
         this.description = attributes.description
+        this.platform = attributes.platform
     }
     render() {
         return `           
@@ -140,8 +173,10 @@ class Post {
             <div class="showInfo">Start Time: ${this.pretty_start}</div>
             <div class="showInfo">End Time: ${this.pretty_end}</div> 
             <div class="showInfo">Description: ${this.description}</div> 
-            <button id="create-post">Create Post</button>
+            <div class="showInfo">Platform: ${this.platform.name}</div>
+
            </div>
+           
            `
     }
     

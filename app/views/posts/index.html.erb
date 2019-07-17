@@ -6,7 +6,10 @@
 
 <ul class="navbar"> 
     <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
-    <li class="navitem"><a><%= link_to "Create a Post", new_post_path %></a></li>
+    <li class="navitem"><a><%= link_to 'CreatePost', new_post_path %></a></li>
+    <li class="navitem"><a><%= link_to "Youtube", platform_path(3) %></a></li>
+    <li class="navitem"><a><%= link_to "Twitter", platform_path(1) %></a></li>
+    <li class="navitem"><a><%= link_to "Instagram", platform_path(2) %></a></li>
 </ul>
 
 
@@ -51,20 +54,11 @@
 <br>
 
 <h2 style="text-align: center"> You have posted <%= @current_user.posts.length %> time(s) </h2>
-<h2 style="margin-left: 50px; margin-top: 20px;">Click to view Posts by a specific Platform!</h2> 
 
-<center style="margin-top: 20px;">
-
-      <h2 style="margin-bottom: 10px;"><%= link_to "Youtube", platform_path(3) %></h2>
-      <h2 style="margin-bottom: 10px;"><%= link_to "Twitter", platform_path(1) %> </h2>
-      <h2><%= link_to "Instagram", platform_path(2) %> </h2>
-    
-</center>
-
-
+<div>
 <div id="published"></div> 
 <div id="error"></div>
-
+</div>
 
 
 <div id='modalBtn' class='button'> </div> 
@@ -81,4 +75,3 @@
 
 <button id="published-posts">Published Posts</button>
 
-<%= link_to 'CreatePost', new_post_path, id: 'published-posts' %> 

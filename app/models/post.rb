@@ -9,12 +9,20 @@ class Post < ApplicationRecord
 
 
     def pretty_start 
-        start_time.strftime("%b %d %Y %l:%M %p")
+        if !start_time.nil?
+            start_time.strftime("%b %d %Y %l:%M %p")
+        else
+            ""
+        end
     end 
 
 
     def pretty_end 
-        end_time.strftime("%b %d %Y %l:%M %p")
+        if !end_time.nil?
+            end_time.strftime("%b %d %Y %l:%M %p")
+        else
+            ""
+        end
     end 
     
 end

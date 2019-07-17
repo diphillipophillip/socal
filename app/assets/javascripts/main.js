@@ -10,6 +10,7 @@ document.addEventListener('turbolinks:load', () => {
 
 const openModal = () => {
     simpleModal.style.display = 'block';
+    
 }
 
 const closeModal = () => {
