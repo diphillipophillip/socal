@@ -43,12 +43,18 @@ class PostsController < ApplicationController
 
     def edit 
         @post = Post.find(params[:id]) 
-        
+        respond_to do |f| 
+            f.html {render :edit}
+            f.json {render json: @post, serializer: IndexSerializer} 
+        end 
     end 
 
     def update 
-        @post.update(post_params)  
-        redirect_to post_path(@post) 
+        @post.update(params.permit(:name, :description, :platform_id, :start_time, :end_time)) 
+        respond_to do |f| 
+            f.html {render 'posts/index'}
+            f.json {render json: @post} 
+        end 
     end 
 
     def destroy 

@@ -2,6 +2,7 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 document.addEventListener('turbolinks:load', () => {
+    
     if (window.location.pathname === '/posts') {
         attachListeners()
         getIndex()
@@ -14,8 +15,10 @@ document.addEventListener('turbolinks:load', () => {
             .then(res => res.json())
             .then(results => displayPublished(results))
             .catch(error => displayError(error))
+            e.target.style.display = 'none'
+            
         })
-        debugger
+
 
         let closeBtn = document.getElementById('closeBtn')
         closeBtn.addEventListener('click', (e) => {
@@ -88,6 +91,7 @@ document.addEventListener('turbolinks:load', () => {
 
 
 
+
 const getIndex = () => {
     return myFetch('http://localhost:3000/posts.json')
         .then(res => res.json())
@@ -145,6 +149,54 @@ const attachListeners = () => {
     })
 }
 
+const getEdit = () => {
+    
+    let edit = document.getElementById('edit')
+    let number = parseInt(edit.getAttribute('data-id'), 10)
+    fetch(`http://localhost:3000/posts/${number}/edit.json`) 
+    .then(res => res.json())
+    .then(results => {
+        renderEdit = new Post(results).renderEdit()
+        document.getElementById('postData').innerHTML = renderEdit 
+        openModal()
+    })
+        
+    }
+
+
+const postEdit = () => {
+    let postEdit = document.getElementById('editForm') 
+    let thisNumber = parseInt(postEdit.getAttribute('data-id'), 10)
+    let html = document.getElementById('token')
+    let token = html.querySelector('#auth_token').value
+
+    let editData = {data: {}}
+    editData['data']['name'] = postEdit.querySelector('#edit_name').value 
+    
+    editData['data']['edit_pretty_start'] = postEdit.querySelector('#edit_pretty_start').value 
+    editData['data']['edit_pretty_end'] = postEdit.querySelector('#edit_pretty_end').value
+    editData['data']['edit_description'] = postEdit.querySelector('#edit_description').value 
+    editData['data']['edit_platform'] = postEdit.querySelector('#edit_platform').value 
+    
+    fetch(`http://localhost:3000/posts/${thisNumber}.json`, {
+        method: 'PATCH', 
+        headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-token': token
+             }, 
+                body: JSON.stringify(editData) 
+        })
+        
+        .then(res => res.json())
+        .then(results => {
+            console.log(results)
+        }) 
+    
+}
+
+
+
 
 
 class Post {
@@ -174,13 +226,31 @@ class Post {
             <div class="showInfo">End Time: ${this.pretty_end}</div> 
             <div class="showInfo">Description: ${this.description}</div> 
             <div class="showInfo">Platform: ${this.platform.name}</div>
-
+            <button id='edit' data-id=${this.id} onclick='getEdit()' >Edit</button>
            </div>
            
            `
     }
+
+
+    renderEdit() {
+        return `
+        <form onsubmit="postEdit()" id="editForm" data-id=${this.id}> 
+        Name: <input type="text" value="${this.name}" id="edit_name"> <br>
+        Start Time: <input type="text" value="${this.pretty_start}" id="edit_pretty_start"> <br> 
+        End Time: <input type="text" value="${this.pretty_end}" id="edit_pretty_end"> <br> 
+        Description: <input type="text" value="${this.description}" id="edit_description"> <br>
+        Platform: <input type="text" value="${this.platform.name}" id="edit_platform"> <br>
+        <input name="authenticity_token" value="authenticity_token" type="hidden">
+        <input type="button" name="submit" value="submit" onclick="postEdit()">
+        </form> 
+        `
+    }
+    
     
 }
+
+
 
 
 
