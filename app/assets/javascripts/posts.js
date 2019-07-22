@@ -81,7 +81,7 @@ document.addEventListener('turbolinks:load', () => {
                 .then(res => res.json()) 
                 .then(function(results) {
                     console.log(results)
-                    window.location.pathname = '/posts'
+                    debugger
                 })
                 .catch(error => console.log(error))
                 
@@ -171,12 +171,13 @@ const postEdit = () => {
     let token = html.querySelector('#auth_token').value
 
     let editData = {data: {}}
-    editData['data']['name'] = postEdit.querySelector('#edit_name').value 
+    editData['data']['name'] = postEdit.querySelector('#name').value 
     
-    editData['data']['edit_pretty_start'] = postEdit.querySelector('#edit_pretty_start').value 
-    editData['data']['edit_pretty_end'] = postEdit.querySelector('#edit_pretty_end').value
-    editData['data']['edit_description'] = postEdit.querySelector('#edit_description').value 
-    editData['data']['edit_platform'] = postEdit.querySelector('#edit_platform').value 
+    editData['data']['edit_pretty_start'] = postEdit.querySelector('#start_time').value 
+    editData['data']['edit_pretty_end'] = postEdit.querySelector('#end_time').value
+    editData['data']['edit_description'] = postEdit.querySelector('#description').value 
+    editData['data']['edit_platform'] = postEdit.querySelector('#platform_id').value 
+    editData['data']['edit_published'] = postEdit.querySelector('#published').value
     
     fetch(`http://localhost:3000/posts/${thisNumber}.json`, {
         method: 'PATCH', 
@@ -190,7 +191,7 @@ const postEdit = () => {
         
         .then(res => res.json())
         .then(results => {
-            console.log(results)
+           console.log(results)
         }) 
     
 }
@@ -207,6 +208,9 @@ class Post {
         this.pretty_end = attributes.pretty_end
         this.description = attributes.description
         this.platform = attributes.platform
+        this.formatted_start_time = attributes.formatted_start_time 
+        this.formatted_end_time = attributes.formatted_end_time
+        
     }
     render() {
         return `           
@@ -236,11 +240,12 @@ class Post {
     renderEdit() {
         return `
         <form onsubmit="postEdit()" id="editForm" data-id=${this.id}> 
-        Name: <input type="text" value="${this.name}" id="edit_name"> <br>
-        Start Time: <input type="text" value="${this.pretty_start}" id="edit_pretty_start"> <br> 
-        End Time: <input type="text" value="${this.pretty_end}" id="edit_pretty_end"> <br> 
-        Description: <input type="text" value="${this.description}" id="edit_description"> <br>
-        Platform: <input type="text" value="${this.platform.name}" id="edit_platform"> <br>
+        Name: <input type="text" value="${this.name}" name="post[name]" id="name"> <br>
+        Start Time: <input type="datetime-local" value="${this.formatted_start_time}" name="post[start_time(1i)] id="start_time"> <br> 
+        End Time: <input type="datetime-local" value="${this.formatted_end_time}" id="end_time"> <br> 
+        Description: <input type="text" name="${this.description}" id="description"> <br>
+        Platform: <input type="text" name="${this.platform.name}" id="platform_id"> <br>
+        Published: <input type="checkbox" name="${this.published}" id="published"> <br>
         <input name="authenticity_token" value="authenticity_token" type="hidden">
         <input type="button" name="submit" value="submit" onclick="postEdit()">
         </form> 

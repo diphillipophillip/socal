@@ -45,15 +45,18 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id]) 
         respond_to do |f| 
             f.html {render :edit}
-            f.json {render json: @post, serializer: IndexSerializer} 
+            f.json {render json: @post, serializer: EditFormSerializer} 
         end 
     end 
 
     def update 
-        @post.update(params.permit(:name, :description, :platform_id, :start_time, :end_time)) 
+        @post = Post.find_by(id: params[:id])
+        @post.update(params.require(:data).permit(:name, :description, :platform_id, :start_time, :end_time)) 
+        
         respond_to do |f| 
             f.html {render 'posts/index'}
             f.json {render json: @post} 
+            
         end 
     end 
 
