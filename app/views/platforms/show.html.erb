@@ -39,8 +39,8 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= link_to post.name, post_path(post) %></td>
-        <td><%= post.start_time %></td>
-        <td><%= post.end_time %></td>
+        <td><%= post.pretty_start %></td>
+        <td><%= post.pretty_end %></td>
       </tr>
     <% end %>
   </tbody>

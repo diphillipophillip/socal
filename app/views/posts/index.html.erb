@@ -1,17 +1,12 @@
 
 
-<form id="token">
-<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" id="auth_token">
-</form>
-
 
 
 <ul class="navbar"> 
     <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
-    <li class="navitem"><a><%= link_to 'CreatePost', new_post_path %></a></li>
-    <li class="navitem"><a><%= link_to "Youtube", platform_path(3) %></a></li>
-    <li class="navitem"><a><%= link_to "Twitter", platform_path(1) %></a></li>
-    <li class="navitem"><a><%= link_to "Instagram", platform_path(2) %></a></li>
+    <li class="navitem"><a><button id="youtube_button"><%= link_to "Youtube", platform_path(3) %></button></a></li>
+    <li class="navitem"><a><button id="twitter_button"><%= link_to "Twitter", platform_path(1) %></button></a></li>
+    <li class="navitem"><a><button id="instagram_button"><%= link_to "Instagram", platform_path(2) %></button></a></li>
 </ul>
 
 
@@ -55,8 +50,6 @@
 
 <br>
 
-<h2 style="text-align: center"> You have posted <%= @current_user.posts.length %> time(s) </h2>
-
 <div>
 <div id="published"></div> 
 <div id="error"></div>
@@ -68,15 +61,50 @@
     <div class='modal-content'>
       <span id='closeBtn'>&times;</span> 
         <div id='postData'>
-          
+  
         </div>
        
     
     </div>
 </div> 
 
+<button id='secondModalBtn' class='secondButton'>Modal</button> 
+  <div id='secondSimpleModal' class='secondModal'> 
+    <div class="secondModalContent"> 
+      <span id="closeSecondBtn">&times;</span> 
+      
+      <form id="form_with_modal"  > 
+<label> Name </label>
+<input type="text" name="name" id="post_name"> <br> 
+<label> Description </label> 
+<textarea name="description" form_id="form_with_modal" id="post_description"> </textarea> <br> 
+<label> Start Time </label> 
+<input type='datetime-local' name="start_time" id="post_start_time"> <br> 
+<label> End Time </label>
+<input type='datetime-local' name="end_time" id="post_end_time"> <br>
+<label> Published </label> 
+<input type="checkbox" name="published" id="post_published"> <br> 
+<label> Platform </label> 
+<select id="post_platform_id"> 
+<option value="Twitter"> Twitter </option> 
+<option value="Instagram"> Instagram </option> 
+<option value="Youtube"> Youtube </option>
+</select>
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" id="auth_token">
+<input type="submit" name="submit" value="submit">
+</form> 
+
+    </div> 
+  </div> 
+
+
+
+
+
 
 <center>
 <button id="published-posts">Published Posts</button>
 </center>
+
+
 

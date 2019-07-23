@@ -3,12 +3,48 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 document.addEventListener('turbolinks:load', () => {
     
-    if (window.location.pathname === '/posts') {
         attachListeners()
         getIndex()
         
         let createPost = document.getElementById('create-post')
         let publishedPostsButton = document.getElementById('published-posts')
+        let insta = document.getElementById('instagram_button')
+        let youtube = document.getElementById('youtube_button')
+        let twitter = document.getElementById('twitter_button')
+
+        insta.addEventListener('click', (e) => {
+
+            e.preventDefault()
+            return fetch('http://localhost:3000/platforms/2.json')
+            .then(results => results.json())
+            .then(response => {
+                let html = response.map(postData => new Post(postData).render()).join('')
+                document.getElementById('posts').innerHTML = html
+                attachListeners()
+            })
+        })
+    
+        youtube.addEventListener('click', (e) => {
+            e.preventDefault()
+            return fetch('http://localhost:3000/platforms/3.json')
+            .then(res => res.json())
+            .then(results => {
+                let html = results.map(postData => new Post(postData).render()).join('')
+                document.getElementById('posts').innerHTML = html
+                attachListeners()
+            })
+        })
+    
+        twitter.addEventListener('click', (e) => {
+            e.preventDefault()
+            return fetch('http://localhost:3000/platforms/1.json')
+            .then(res => res.json())
+            .then(results => {
+                let html = results.map(postData => new Post(postData).render()).join('')
+                document.getElementById('posts').innerHTML = html
+                attachListeners()
+            })
+        })
 
         publishedPostsButton.addEventListener('click', (e) => {
             getPublished()
@@ -24,70 +60,7 @@ document.addEventListener('turbolinks:load', () => {
         closeBtn.addEventListener('click', (e) => {
             closeModal()
         })
-    } else if (window.location.pathname === '/posts/new') {
-        
-        let newPostForm = document.getElementById('new_post')
-        newPostForm.addEventListener('submit', (e) => {
-            e.preventDefault()
-            let data = {post: {}}; 
-            //let start_time = new Date('12 20, 1995 2:30')
-            
-            let start_time = ""
-            start_time += e.target.querySelector('#post_start_time_2i').value
-            start_time += " "
-            start_time += e.target.querySelector('#post_start_time_3i').value
-            start_time += ", "
-            start_time += e.target.querySelector('#post_start_time_1i').value
-            start_time += " "
-            start_time += e.target.querySelector('#post_start_time_4i').value
-            start_time += ":"
-            start_time += e.target.querySelector('#post_start_time_5i').value
-            let start = new Date(start_time)
-            
-            let end_time = ""
-            end_time += e.target.querySelector('#post_start_time_2i').value
-            end_time += " "
-            end_time += e.target.querySelector('#post_start_time_3i').value
-            end_time += ", "
-            end_time += e.target.querySelector('#post_start_time_1i').value
-            end_time += " "
-            end_time += e.target.querySelector('#post_start_time_4i').value
-            end_time += ":"
-            end_time += e.target.querySelector('#post_start_time_5i').value
-            let end = new Date(end_time)
-            
-            data['post']['start_time'] = start
-            data['post']['end_time'] = end
-            
-            data['post']['name'] = e.target.querySelector('#post_name').value
-            data['post']['description'] = e.target.querySelector('#post_description').value 
-            
-            data['post']['published'] = e.target.querySelector('#post_published').value 
-            data['post']['platform_id'] = e.target.querySelector('#post_platform_id').value 
-            data['post']['images'] = e.target.querySelector('#post_images').value 
-
-            let token = e.target.querySelector('input[name=authenticity_token]').value
-            
-            fetch(`${e.target.action}`, { 
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-token': token
-                }, 
-                body: JSON.stringify(data)
-                
-            })  
-                .then(res => res.json()) 
-                .then(function(results) {
-                    console.log(results)
-                    debugger
-                })
-                .catch(error => console.log(error))
-                
-        })
-    }
-}) 
+    }) 
 
 
 
@@ -100,7 +73,6 @@ const getIndex = () => {
 }
 
 const displayIndex = (results) => {
-    
     let html = results.map(postData => new Post(postData).render()).join('')
     document.getElementById('posts').innerHTML = html
     attachListeners()
@@ -251,6 +223,8 @@ class Post {
         </form> 
         `
     }
+
+    
     
     
 }

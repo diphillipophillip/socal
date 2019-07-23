@@ -18,6 +18,10 @@ class PlatformsController < ApplicationController
         @posts = current_user.posts.where(platform_id: params[:id])
         @platform_id = Platform.find_by(id: params[:id])
         @platform = @platform_id.name 
+        respond_to do |f| 
+            f.html {render :show} 
+            f.json {render json: @posts, each_serializer: PlatformSerializer }
+        end 
     end
 
     def instagram
