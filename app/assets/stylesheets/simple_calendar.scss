@@ -7,9 +7,11 @@
       border-collapse: collapse;
       box-sizing: border-box;
       max-width: 100%;
-      width: 60%;
+      width: 50%;
       float: right;
-      
+      //margin-left: 20px
+      //display: inline-block;
+      //position: fixed;
     }
   
     tr {
@@ -48,7 +50,7 @@
     }
   
     .day {
-      height: 80px;
+      height: 40px;
     }
   
     .wday-0 {}
@@ -60,7 +62,7 @@
     .wday-6 {}
   
     .today {
-      background: #A22C29
+      background: #F7C331;
     }
   
     .past {}
@@ -78,4 +80,11 @@
   
     .has-events {}
   }
+
+  .calendar-heading {
+    margin-left: 50%;
+    margin-bottom: 10px;
+  }
+
+  
   

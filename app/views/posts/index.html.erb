@@ -1,13 +1,21 @@
 
 
-
-
 <ul class="navbar"> 
     <li class="navitem"><a><%= link_to "Logout", logout_path %></a></li> 
-    <li class="navitem"><a><button id="youtube_button"><%= link_to "Youtube", platform_path(3) %></button></a></li>
-    <li class="navitem"><a><button id="twitter_button"><%= link_to "Twitter", platform_path(1) %></button></a></li>
-    <li class="navitem"><a><button id="instagram_button"><%= link_to "Instagram", platform_path(2) %></button></a></li>
 </ul>
+
+
+<div class="content"> 
+<center>
+  <div> <button id='secondModalBtn' class='button'>Create Post</button> </div> 
+  <div> <button id="youtube_button" class='button'>Youtube</button> </div> 
+  <div> <button id="twitter_button" class='button'>Twitter</button> </div> 
+  <div> <button id="instagram_button" class='button'>Instagram</button> </div> 
+  <div> <button id="published-posts" class='button'>Published Posts</button></div>
+  </center>
+</div>
+
+
 
 
 
@@ -23,7 +31,7 @@
 <% end %>
 </div>
 
-
+<div id="table">
 <table class='table'>
   <thead>
     <tr>
@@ -45,7 +53,7 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 
 
 <br>
@@ -68,7 +76,7 @@
     </div>
 </div> 
 
-<button id='secondModalBtn' class='secondButton'>Modal</button> 
+ 
   <div id='secondSimpleModal' class='secondModal'> 
     <div class="secondModalContent"> 
       <span id="closeSecondBtn">&times;</span> 
@@ -102,9 +110,6 @@
 
 
 
-<center>
-<button id="published-posts">Published Posts</button>
-</center>
 
 
 

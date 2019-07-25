@@ -43,7 +43,7 @@ document.addEventListener('turbolinks:load', () => {
         })
             .then(response => response.json())
             .then(function(json) {
-                debugger
+                
             })
             .catch(error => console.log(error))
     })
